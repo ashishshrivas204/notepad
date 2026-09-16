@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Notepad</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app" id="app">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-icon">✎</span>
+        <span>My Notepad</span>
+        <span class="doc-state" id="docState">Untitled</span>
+      </div>
+
+      <nav class="menu-bar" id="menuBar" aria-label="Application menu">
+        <button class="menu-trigger" data-menu="fileMenu">File</button>
+        <button class="menu-trigger" data-menu="editMenu">Edit</button>
+        <button class="menu-trigger" data-menu="editsMenu">Edits</button>
+        <button class="menu-trigger" data-menu="viewMenu">View</button>
+        <button class="menu-trigger" data-menu="helpMenu">Help</button>
+      </nav>
+
+      <div class="top-actions">
+        <button class="icon-btn" id="themeToggle" title="Toggle theme">☾</button>
+      </div>
+    </header>
+
+    <div class="dropdown-layer">
+      <div class="dropdown" id="fileMenu">
+        <button data-action="new">＋ New <span>Ctrl+N</span></button>
+        <button data-action="new-window">▣ New Window</button>
+        <button data-action="open">↥ Open <span>Ctrl+O</span></button>
+        <button data-action="save">↓ Save <span>Ctrl+S</span></button>
+        <button data-action="save-as">↓ Save As <span>Ctrl+Shift+S</span></button>
+        <button data-action="save-all">⇩ Save All</button>
+        <div class="menu-sep"></div>
+        <button data-action="close">× Close</button>
+        <button data-action="exit">⎋ Exit</button>
+      </div>
+
+      <div class="dropdown" id="editMenu">
+        <button data-action="undo">↶ Undo <span>Ctrl+Z</span></button>
+        <button data-action="redo">↷ Redo <span>Ctrl+Y</span></button>
+        <div class="menu-sep"></div>
+        <button data-action="cut">✂ Cut <span>Ctrl+X</span></button>
+        <button data-action="copy">⧉ Copy <span>Ctrl+C</span></button>
+        <button data-action="paste">▣ Paste <span>Ctrl+V</span></button>
+        <button data-action="delete">⌫ Delete</button>
+        <button data-action="select-all">▣ Select All <span>Ctrl+A</span></button>
+        <div class="menu-sep"></div>
+        <button data-action="find">⌕ Find <span>Ctrl+F</span></button>
+        <button data-action="replace">⇄ Replace <span>Ctrl+H</span></button>
+        <div class="menu-sep"></div>
+        <button data-action="text-color">A Text Color</button>
+        <button data-action="bg-color">▰ Background Color</button>
+        <button data-action="font">Aa Font Family</button>
+        <button data-action="font-size">T Font Size</button>
+      </div>
+
+      <div class="dropdown wide" id="editsMenu">
+        <button data-action="bold"><b>B</b> Bold <span>Ctrl+B</span></button>
+        <button data-action="italic"><i>I</i> Italic <span>Ctrl+I</span></button>
+        <button data-action="underline"><u>U</u> Underline <span>Ctrl+U</span></button>
+        <button data-action="strike"><s>S</s> Strikethrough</button>
+        <button data-action="heading">H Heading Style</button>
+        <div class="menu-sep"></div>
+        <button data-action="font">Aa Font Family</button>
+        <button data-action="font-size">T Font Size</button>
+        <button data-action="text-color">A Text Color</button>
+        <button data-action="highlight">▰ Highlight Color</button>
+        <button data-action="bg-color">▰ Background Color</button>
+        <button data-action="letter-spacing">↔ Letter Spacing</button>
+        <div class="menu-sep"></div>
+        <button data-action="align-left">≡ Align Left</button>
+        <button data-action="align-center">≡ Center</button>
+        <button data-action="align-right">≡ Align Right</button>
+        <button data-action="justify">☰ Justify</button>
+        <div class="menu-sep"></div>
+        <button data-action="image">▧ Insert Image</button>
+        <button data-action="sticker">★ Stickers</button>
+      </div>
+
+      <div class="dropdown" id="viewMenu">
+        <button data-action="zoom-in">＋ Zoom In</button>
+        <button data-action="zoom-out">− Zoom Out</button>
+        <button data-action="zoom-reset">100% Reset Zoom</button>
+        <div class="menu-sep"></div>
+        <button data-action="fullscreen">⛶ Full Screen</button>
+        <button data-action="word-wrap">↪ Word Wrap <span id="wrapState">On</span></button>
+        <button data-action="line-numbers"># Line Numbers <span id="lineState">Off</span></button>
+        <button data-action="status-bar">▰ Status Bar <span id="statusState">On</span></button>
+      </div>
+
+      <div class="dropdown" id="helpMenu">
+        <button data-action="help">? Help</button>
+        <button data-action="shortcuts">⌨ Keyboard Shortcuts</button>
+        <button data-action="features">✦ Features</button>
+        <div class="menu-sep"></div>
+        <button data-action="about">ⓘ About Notepad</button>
+        <button data-action="version">Version Information</button>
+      </div>
+    </div>
+
+    <main class="workspace">
+      <aside class="line-panel" id="linePanel" aria-hidden="true"></aside>
+      <section class="editor-shell">
+        <div class="editor-toolbar">
+          <span class="toolbar-label">Document</span>
+          <button class="tool-btn" data-action="bold" title="Bold"><b>B</b></button>
+          <button class="tool-btn" data-action="italic" title="Italic"><i>I</i></button>
+          <button class="tool-btn" data-action="underline" title="Underline"><u>U</u></button>
+          <span class="toolbar-divider"></span>
+          <select id="fontSelect" title="Font Family">
+            <option value="Inter, sans-serif">Inter</option>
+            <option value="Arial, sans-serif">Arial</option>
+            <option value="Georgia, serif">Georgia</option>
+            <option value="'Times New Roman', serif">Times New Roman</option>
+            <option value="'Courier New', monospace">Courier New</option>
+            <option value="Verdana, sans-serif">Verdana</option>
+          </select>
+          <select id="sizeSelect" title="Font Size">
+            <option value="14px">14</option>
+            <option value="16px" selected>16</option>
+            <option value="18px">18</option>
+            <option value="20px">20</option>
+            <option value="24px">24</option>
+            <option value="28px">28</option>
+            <option value="32px">32</option>
+            <option value="42px">42</option>
+
+          </select>
+          <button class="tool-btn" id="textColorBtn" title="Text Color">A</button>
+          <button class="tool-btn" id="highlightBtn" title="Highlight">▰</button>
+          <button class="tool-btn" data-action="align-left" title="Align Left">≡</button>
+          <button class="tool-btn" data-action="align-center" title="Center">≡</button>
+          <button class="tool-btn" data-action="align-right" title="Align Right">≡</button>
+        </div>
+
+        <div class="editor-scroll" id="editorScroll">
+          <div id="editor" class="editor" contenteditable="true" spellcheck="true"
+               data-placeholder="Start typing your document..."></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="statusbar" id="statusbar">
+      <div>Ln <strong id="lineNo">1</strong>, Col <strong id="colNo">1</strong></div>
+      <div><span id="wordCount">0</span> words</div>
+      <div><span id="charCount">0</span> characters</div>
+      <div class="status-spacer"></div>
+      <div id="saveStatus">Saved</div>
+      <div>Zoom <strong id="zoomValue">100%</strong></div>
+    </footer>
+  </div>
+
+  <input type="file" id="fileInput" accept=".txt,.text,.md,.html,.htm" hidden>
+  <input type="file" id="imageInput" accept="image/*" hidden>
+  <input type="color" id="textColorInput" value="#dbeafe" hidden>
+  <input type="color" id="highlightInput" value="#3b82f6" hidden>
+  <input type="color" id="bgColorInput" value="#172033" hidden>
+
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal" id="modal"></div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="script.js"></script>
+</body>
+</html>
