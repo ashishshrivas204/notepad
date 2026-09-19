@@ -7,166 +7,211 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="app" id="app">
+  <!-- ===== APPLICATION SHELL ===== -->
+  <div id="app" class="app">
     <header class="topbar">
       <div class="brand">
-        <span class="brand-icon">✎</span>
-        <span>My Notepad</span>
-        <span class="doc-state" id="docState">Untitled</span>
+        <div class="brand-icon">N</div>
+        <div>
+          <div class="brand-name">Modern Notepad</div>
+          <div class="brand-subtitle">Professional Editor</div>
+        </div>
       </div>
 
-      <nav class="menu-bar" id="menuBar" aria-label="Application menu">
-        <button class="menu-trigger" data-menu="fileMenu">File</button>
-        <button class="menu-trigger" data-menu="editMenu">Edit</button>
-        <button class="menu-trigger" data-menu="editsMenu">Edits</button>
-        <button class="menu-trigger" data-menu="viewMenu">View</button>
-        <button class="menu-trigger" data-menu="helpMenu">Help</button>
+      <!-- ===== MAIN MENU BAR ===== -->
+      <nav class="menu-bar" aria-label="Main menu">
+        <div class="menu">
+          <button class="menu-button" data-menu="fileMenu">File</button>
+          <div class="dropdown" id="fileMenu">
+            <button data-action="new">New <span>Ctrl+N</span></button>
+            <button data-action="new-window">New Window</button>
+            <button data-action="open">Open <span>Ctrl+O</span></button>
+            <button data-action="save">Save <span>Ctrl+S</span></button>
+            <button data-action="save-as">Save As <span>Ctrl+Shift+S</span></button>
+            <button data-action="save-all">Save All</button>
+            <div class="separator"></div>
+            <button data-action="close">Close</button>
+            <button data-action="exit">Exit</button>
+          </div>
+        </div>
+
+        <div class="menu">
+          <button class="menu-button" data-menu="editMenu">Edit</button>
+          <div class="dropdown" id="editMenu">
+            <button data-action="undo">Undo <span>Ctrl+Z</span></button>
+            <button data-action="redo">Redo <span>Ctrl+Y</span></button>
+            <div class="separator"></div>
+            <button data-action="cut">Cut <span>Ctrl+X</span></button>
+            <button data-action="copy">Copy <span>Ctrl+C</span></button>
+            <button data-action="paste">Paste <span>Ctrl+V</span></button>
+            <button data-action="delete">Delete</button>
+            <button data-action="select-all">Select All <span>Ctrl+A</span></button>
+            <div class="separator"></div>
+            <button data-action="find">Find <span>Ctrl+F</span></button>
+            <button data-action="find-next">Find Next <span>F3</span></button>
+            <button data-action="find-prev">Find Previous <span>Shift+F3</span></button>
+            <button data-action="replace">Replace <span>Ctrl+H</span></button>
+            <div class="separator"></div>
+            <button data-action="text-color">Text Color</button>
+            <button data-action="background-color">Background Color</button>
+            <button data-action="font-family">Font Family</button>
+            <button data-action="font-size">Font Size</button>
+          </div>
+        </div>
+
+        <div class="menu">
+          <button class="menu-button" data-menu="editsMenu">Edits</button>
+          <div class="dropdown wide-dropdown" id="editsMenu">
+            <button data-command="bold"><strong>B</strong> Bold <span>Ctrl+B</span></button>
+            <button data-command="italic"><em>I</em> Italic <span>Ctrl+I</span></button>
+            <button data-command="underline"><u>U</u> Underline <span>Ctrl+U</span></button>
+            <button data-command="strikeThrough">S̶ Strikethrough</button>
+            <div class="separator"></div>
+            <button data-action="font-family">Font Family</button>
+            <button data-action="font-size">Font Size</button>
+            <button data-action="text-color">Text Color</button>
+            <button data-action="highlight-color">Highlight Color</button>
+            <button data-action="background-color">Background Color</button>
+            <div class="separator"></div>
+            <button data-command="justifyLeft">Align Left</button>
+            <button data-command="justifyCenter">Center</button>
+            <button data-command="justifyRight">Align Right</button>
+            <button data-command="justifyFull">Justify</button>
+            <div class="separator"></div>
+            <button data-action="insert-image">Insert Image</button>
+            <button data-action="stickers">Stickers</button>
+          </div>
+        </div>
+
+        <div class="menu">
+          <button class="menu-button" data-menu="viewMenu">View</button>
+          <div class="dropdown" id="viewMenu">
+            <button data-action="zoom-in">Zoom In <span>Ctrl++</span></button>
+            <button data-action="zoom-out">Zoom Out <span>Ctrl+-</span></button>
+            <button data-action="zoom-reset">Reset Zoom</button>
+            <div class="separator"></div>
+            <button data-action="fullscreen">Full Screen</button>
+            <button data-action="word-wrap">Word Wrap</button>
+            <button data-action="line-numbers">Line Numbers</button>
+            <button data-action="status-bar">Status Bar</button>
+          </div>
+        </div>
+
+        <div class="menu">
+          <button class="menu-button" data-menu="helpMenu">Help</button>
+          <div class="dropdown" id="helpMenu">
+            <button data-action="help">Help</button>
+            <button data-action="shortcuts">Keyboard Shortcuts</button>
+            <button data-action="features">Features</button>
+            <button data-action="about">About Notepad</button>
+            <button data-action="version">Version Information</button>
+          </div>
+        </div>
       </nav>
 
+      <!-- ===== THEME SYSTEM ===== -->
       <div class="top-actions">
-        <button class="icon-btn" id="themeToggle" title="Toggle theme">☾</button>
+        <button id="voiceButton" class="icon-button voice-button" title="Voice to Text" aria-label="Voice to Text">🎙</button>
+        <button id="themeToggle" class="theme-toggle" title="Toggle theme">☀ / 🌙</button>
       </div>
     </header>
 
-    <div class="dropdown-layer">
-      <div class="dropdown" id="fileMenu">
-        <button data-action="new">＋ New <span>Ctrl+N</span></button>
-        <button data-action="new-window">▣ New Window</button>
-        <button data-action="open">↥ Open <span>Ctrl+O</span></button>
-        <button data-action="save">↓ Save <span>Ctrl+S</span></button>
-        <button data-action="save-as">↓ Save As <span>Ctrl+Shift+S</span></button>
-        <button data-action="save-all">⇩ Save All</button>
-        <div class="menu-sep"></div>
-        <button data-action="close">× Close</button>
-        <button data-action="exit">⎋ Exit</button>
-      </div>
+    <!-- ===== DRAWING TOOLS ===== -->
+    <section class="drawing-toolbar" aria-label="Drawing and diagram toolbar">
+      <div class="toolbar-label">DRAW</div>
+      <button class="tool-button active" data-tool="select" title="Select / Text">↖</button>
+      <button class="tool-button" data-tool="pen" title="Freehand Pen">✎</button>
+      <button class="tool-button" data-tool="line" title="Line">╱</button>
+      <button class="tool-button" data-tool="arrow" title="Arrow">➜</button>
+      <button class="tool-button" data-tool="circle" title="Circle">○</button>
+      <button class="tool-button" data-tool="rectangle" title="Rectangle">□</button>
+      <button class="tool-button" data-tool="triangle" title="Triangle">△</button>
+      <button class="tool-button" data-tool="dot" title="Dot">●</button>
+      <button class="tool-button" data-tool="eraser" title="Eraser">⌫</button>
+      <span class="toolbar-divider"></span>
+      <button id="paletteButton" class="tool-button palette-button" title="Drawing Color Palette">🎨</button>
+      <label class="stroke-size" title="Drawing size">
+        <span>Size</span>
+        <input id="strokeSize" type="range" min="1" max="24" value="4">
+      </label>
+      <button id="clearDrawing" class="tool-button danger-tool" title="Clear drawings">⌫</button>
 
-      <div class="dropdown" id="editMenu">
-        <button data-action="undo">↶ Undo <span>Ctrl+Z</span></button>
-        <button data-action="redo">↷ Redo <span>Ctrl+Y</span></button>
-        <div class="menu-sep"></div>
-        <button data-action="cut">✂ Cut <span>Ctrl+X</span></button>
-        <button data-action="copy">⧉ Copy <span>Ctrl+C</span></button>
-        <button data-action="paste">▣ Paste <span>Ctrl+V</span></button>
-        <button data-action="delete">⌫ Delete</button>
-        <button data-action="select-all">▣ Select All <span>Ctrl+A</span></button>
-        <div class="menu-sep"></div>
-        <button data-action="find">⌕ Find <span>Ctrl+F</span></button>
-        <button data-action="replace">⇄ Replace <span>Ctrl+H</span></button>
-        <div class="menu-sep"></div>
-        <button data-action="text-color">A Text Color</button>
-        <button data-action="bg-color">▰ Background Color</button>
-        <button data-action="font">Aa Font Family</button>
-        <button data-action="font-size">T Font Size</button>
+      <!-- ===== COLOR PALETTE ===== -->
+      <div id="colorPalette" class="color-popover">
+        <div class="palette-heading">Basic Colors</div>
+        <div id="basicColors" class="color-grid"></div>
+        <div class="palette-heading">Two-Color Combinations</div>
+        <div id="twoColorCombos" class="combo-grid"></div>
+        <div class="palette-heading">Three-Color Combinations</div>
+        <div id="threeColorCombos" class="combo-grid"></div>
+        <div class="palette-current">
+          <span>Primary</span><i id="primaryColorPreview"></i>
+          <span>Secondary</span><i id="secondaryColorPreview"></i>
+        </div>
       </div>
+    </section>
 
-      <div class="dropdown wide" id="editsMenu">
-        <button data-action="bold"><b>B</b> Bold <span>Ctrl+B</span></button>
-        <button data-action="italic"><i>I</i> Italic <span>Ctrl+I</span></button>
-        <button data-action="underline"><u>U</u> Underline <span>Ctrl+U</span></button>
-        <button data-action="strike"><s>S</s> Strikethrough</button>
-        <button data-action="heading">H Heading Style</button>
-        <div class="menu-sep"></div>
-        <button data-action="font">Aa Font Family</button>
-        <button data-action="font-size">T Font Size</button>
-        <button data-action="text-color">A Text Color</button>
-        <button data-action="highlight">▰ Highlight Color</button>
-        <button data-action="bg-color">▰ Background Color</button>
-        <button data-action="letter-spacing">↔ Letter Spacing</button>
-        <div class="menu-sep"></div>
-        <button data-action="align-left">≡ Align Left</button>
-        <button data-action="align-center">≡ Center</button>
-        <button data-action="align-right">≡ Align Right</button>
-        <button data-action="justify">☰ Justify</button>
-        <div class="menu-sep"></div>
-        <button data-action="image">▧ Insert Image</button>
-        <button data-action="sticker">★ Stickers</button>
-      </div>
-
-      <div class="dropdown" id="viewMenu">
-        <button data-action="zoom-in">＋ Zoom In</button>
-        <button data-action="zoom-out">− Zoom Out</button>
-        <button data-action="zoom-reset">100% Reset Zoom</button>
-        <div class="menu-sep"></div>
-        <button data-action="fullscreen">⛶ Full Screen</button>
-        <button data-action="word-wrap">↪ Word Wrap <span id="wrapState">On</span></button>
-        <button data-action="line-numbers"># Line Numbers <span id="lineState">Off</span></button>
-        <button data-action="status-bar">▰ Status Bar <span id="statusState">On</span></button>
-      </div>
-
-      <div class="dropdown" id="helpMenu">
-        <button data-action="help">? Help</button>
-        <button data-action="shortcuts">⌨ Keyboard Shortcuts</button>
-        <button data-action="features">✦ Features</button>
-        <div class="menu-sep"></div>
-        <button data-action="about">ⓘ About Notepad</button>
-        <button data-action="version">Version Information</button>
-      </div>
-    </div>
-
+    <!-- ===== MAIN WORKSPACE ===== -->
     <main class="workspace">
-      <aside class="line-panel" id="linePanel" aria-hidden="true"></aside>
+      <aside id="lineNumbers" class="line-numbers" aria-hidden="true">1</aside>
       <section class="editor-shell">
-        <div class="editor-toolbar">
-          <span class="toolbar-label">Document</span>
-          <button class="tool-btn" data-action="bold" title="Bold"><b>B</b></button>
-          <button class="tool-btn" data-action="italic" title="Italic"><i>I</i></button>
-          <button class="tool-btn" data-action="underline" title="Underline"><u>U</u></button>
-          <span class="toolbar-divider"></span>
-          <select id="fontSelect" title="Font Family">
-            <option value="Inter, sans-serif">Inter</option>
-            <option value="Arial, sans-serif">Arial</option>
-            <option value="Georgia, serif">Georgia</option>
-            <option value="'Times New Roman', serif">Times New Roman</option>
-            <option value="'Courier New', monospace">Courier New</option>
-            <option value="Verdana, sans-serif">Verdana</option>
-          </select>
-          <select id="sizeSelect" title="Font Size">
-            <option value="14px">14</option>
-            <option value="16px" selected>16</option>
-            <option value="18px">18</option>
-            <option value="20px">20</option>
-            <option value="24px">24</option>
-            <option value="28px">28</option>
-            <option value="32px">32</option>
-            <option value="42px">42</option>
-
-          </select>
-          <button class="tool-btn" id="textColorBtn" title="Text Color">A</button>
-          <button class="tool-btn" id="highlightBtn" title="Highlight">▰</button>
-          <button class="tool-btn" data-action="align-left" title="Align Left">≡</button>
-          <button class="tool-btn" data-action="align-center" title="Center">≡</button>
-          <button class="tool-btn" data-action="align-right" title="Align Right">≡</button>
+        <div class="document-tab">
+          <span class="tab-dot"></span>
+          <span id="documentName">Untitled.txt</span>
+          <span id="modifiedMark" class="modified-mark"></span>
         </div>
-
-        <div class="editor-scroll" id="editorScroll">
-          <div id="editor" class="editor" contenteditable="true" spellcheck="true"
-               data-placeholder="Start typing your document..."></div>
+        <div id="editorViewport" class="editor-viewport">
+          <div id="editor" class="editor" contenteditable="true" spellcheck="true" role="textbox" aria-multiline="true">
+            <p><br></p>
+          </div>
+          <canvas id="drawingCanvas" class="drawing-canvas"></canvas>
         </div>
+        <div id="voiceStatus" class="voice-status">Voice ready</div>
       </section>
     </main>
 
-    <footer class="statusbar" id="statusbar">
-      <div>Ln <strong id="lineNo">1</strong>, Col <strong id="colNo">1</strong></div>
-      <div><span id="wordCount">0</span> words</div>
-      <div><span id="charCount">0</span> characters</div>
+    <!-- ===== STATUS BAR ===== -->
+    <footer id="statusBar" class="status-bar">
+      <div><span>Ln</span> <strong id="lineStatus">1</strong></div>
+      <div><span>Col</span> <strong id="columnStatus">1</strong></div>
+      <div><span>Words</span> <strong id="wordStatus">0</strong></div>
+      <div><span>Characters</span> <strong id="charStatus">0</strong></div>
       <div class="status-spacer"></div>
-      <div id="saveStatus">Saved</div>
-      <div>Zoom <strong id="zoomValue">100%</strong></div>
+      <div><span>Zoom</span> <strong id="zoomStatus">100%</strong></div>
     </footer>
   </div>
 
-  <input type="file" id="fileInput" accept=".txt,.text,.md,.html,.htm" hidden>
-  <input type="file" id="imageInput" accept="image/*" hidden>
-  <input type="color" id="textColorInput" value="#dbeafe" hidden>
-  <input type="color" id="highlightInput" value="#3b82f6" hidden>
-  <input type="color" id="bgColorInput" value="#172033" hidden>
+  <!-- ===== HIDDEN FILE INPUTS ===== -->
+  <input id="fileInput" type="file" accept=".txt,.text,.md,.html,.htm,.json,.csv" hidden>
+  <input id="imageInput" type="file" accept="image/*" hidden>
 
-  <div class="modal-backdrop" id="modalBackdrop">
-    <div class="modal" id="modal"></div>
+  <!-- ===== DIALOGS ===== -->
+  <div id="modalBackdrop" class="modal-backdrop hidden">
+    <div id="modal" class="modal" role="dialog" aria-modal="true">
+      <div class="modal-header">
+        <h2 id="modalTitle">Modern Notepad</h2>
+        <button id="modalClose" class="modal-close">×</button>
+      </div>
+      <div id="modalBody" class="modal-body"></div>
+      <div id="modalActions" class="modal-actions"></div>
+    </div>
   </div>
 
-  <div class="toast" id="toast"></div>
+  <!-- ===== FIND / REPLACE PANEL ===== -->
+  <div id="findPanel" class="find-panel hidden">
+    <div class="find-row">
+      <input id="findInput" type="text" placeholder="Find text">
+      <button id="findPrevButton">↑</button>
+      <button id="findNextButton">↓</button>
+      <button id="findClose">×</button>
+    </div>
+    <div class="replace-row">
+      <input id="replaceInput" type="text" placeholder="Replace with">
+      <button id="replaceOne">Replace</button>
+      <button id="replaceAll">Replace All</button>
+    </div>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>
